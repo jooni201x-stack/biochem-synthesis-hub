@@ -1,4 +1,5 @@
-import { Download } from "lucide-react";
+import { Download, ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const PRODUCTS = [
   {
@@ -161,13 +162,23 @@ export function Products() {
                   )}
                 </dl>
 
-                <button
-                  className="mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest border-b pb-1 transition-colors"
-                  style={{ color: p.accent, borderColor: `${p.accent}55` }}
-                >
-                  <Download size={13} strokeWidth={1.8} />
-                  데이터시트 다운로드
-                </button>
+                <div className="mt-8 flex items-center justify-between gap-4 flex-wrap">
+                  <button
+                    className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest border-b pb-1 transition-colors"
+                    style={{ color: p.accent, borderColor: `${p.accent}55` }}
+                  >
+                    <Download size={13} strokeWidth={1.8} />
+                    데이터시트
+                  </button>
+                  {p.code === "PP-4" && (
+                    <Link
+                      to="/ingredients/pp4"
+                      className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-foreground hover-lime"
+                    >
+                      자세히 보기 <ArrowRight size={12} />
+                    </Link>
+                  )}
+                </div>
               </div>
             </article>
           ))}
