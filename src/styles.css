@@ -110,6 +110,12 @@
   .animate-marquee { animation: marquee 40s linear infinite; }
   .animate-marquee-medium { animation: marquee 25s linear infinite; }
 
+  @keyframes pulse-badge {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.75; transform: scale(1.04); }
+  }
+  .animate-pulse-badge { animation: pulse-badge 1.8s ease-in-out infinite; }
+
   @keyframes molecule-pulse {
     0%, 100% { opacity: 0.3; transform: scale(1); }
     50% { opacity: 0.8; transform: scale(1.05); }
