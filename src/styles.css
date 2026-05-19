@@ -108,6 +108,7 @@
     100% { transform: translateX(-50%); }
   }
   .animate-marquee { animation: marquee 40s linear infinite; }
+  .animate-marquee-medium { animation: marquee 25s linear infinite; }
 
   @keyframes molecule-pulse {
     0%, 100% { opacity: 0.3; transform: scale(1); }
