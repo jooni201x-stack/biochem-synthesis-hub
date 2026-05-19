@@ -1,19 +1,34 @@
+import { Check, Minus, X } from "lucide-react";
+
 const FEATURES = [
   { tag: "SYNTHESIS", title: "팔미토일 계열 최적화 공정", body: "지용성 팔미토일 시퀀스에서 수율이 높고 배치 일관성이 우수합니다." },
   { tag: "QUALITY", title: "순도 95% 이상, 배치마다 검증", body: "외부 공인기관 성적서. CoA·SDS·중금속 시험 전 문서 즉시 제공." },
   { tag: "SUPPLY", title: "발주 후 3~5일 납기", body: "해외 수입 3~8주 대비 국내 직접 합성으로 즉시 공급." },
 ];
 
-const TABLE = {
-  cols: ["항목", "중국산", "미국·스페인산", "withbiochem"],
-  rows: [
-    ["순도", "변동 큼", "95%+", "95%+ 보장"],
-    ["납기", "4~6주", "6~8주", "3~5일"],
-    ["MOQ", "1kg+", "500g+", "50g~"],
-    ["단가", "낮음", "매우 높음", "시장가 -30%"],
-    ["기술지원", "제한적", "한국어 X", "박사 직접 지원"],
-    ["소통", "느림", "영어/시차", "실시간 한국어"],
-  ],
+type Tone = "neg" | "neu" | "pos";
+type Cell = { v: string; tone: Tone };
+
+const COLS = ["항목", "중국산", "미국·스페인산", "withbiochem"];
+const ROWS: { label: string; cells: [Cell, Cell, Cell] }[] = [
+  { label: "순도", cells: [{ v: "변동 큼", tone: "neg" }, { v: "95%+", tone: "neu" }, { v: "95%+ 보장", tone: "pos" }] },
+  { label: "납기", cells: [{ v: "4~6주", tone: "neg" }, { v: "6~8주", tone: "neg" }, { v: "3~5일", tone: "pos" }] },
+  { label: "MOQ", cells: [{ v: "1kg+", tone: "neg" }, { v: "500g+", tone: "neu" }, { v: "50g~", tone: "pos" }] },
+  { label: "단가", cells: [{ v: "낮음", tone: "neu" }, { v: "매우 높음", tone: "neg" }, { v: "시장가 -30%", tone: "pos" }] },
+  { label: "기술지원", cells: [{ v: "제한적", tone: "neg" }, { v: "한국어 X", tone: "neu" }, { v: "박사 직접 지원", tone: "pos" }] },
+  { label: "소통", cells: [{ v: "느림", tone: "neg" }, { v: "영어/시차", tone: "neu" }, { v: "실시간 한국어", tone: "pos" }] },
+];
+
+const ToneIcon = ({ tone }: { tone: Tone }) => {
+  if (tone === "pos") return <Check size={14} strokeWidth={2.4} className="text-lime shrink-0" />;
+  if (tone === "neu") return <Minus size={14} strokeWidth={2.4} className="text-amber-400 shrink-0" />;
+  return <X size={14} strokeWidth={2.4} className="text-red-400 shrink-0" />;
+};
+
+const toneText: Record<Tone, string> = {
+  pos: "text-lime",
+  neu: "text-amber-300/90",
+  neg: "text-red-400/85",
 };
 
 export function Technology() {
@@ -42,32 +57,70 @@ export function Technology() {
 
         <div className="mt-24">
           <div className="label-mono mb-6">COMPARISON · 공급사 비교</div>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="border-b border-border">
-                  {TABLE.cols.map((c, i) => (
-                    <th key={i} className={`text-left py-5 px-4 font-mono text-xs uppercase tracking-widest ${i === 3 ? 'text-lime bg-primary/5' : 'text-text-secondary'}`}>
-                      {c}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {TABLE.rows.map((row, i) => (
-                  <tr key={i} className="border-b border-border">
-                    {row.map((cell, j) => (
-                      <td key={j} className={`py-5 px-4 text-sm ${j === 0 ? 'font-mono text-text-secondary uppercase tracking-wider text-xs' : j === 3 ? 'text-lime font-medium bg-primary/5' : 'text-foreground'}`}>
-                        {cell}
-                      </td>
+
+          <div className="overflow-x-auto -mx-6 px-6 lg:mx-0 lg:px-0">
+            <div className="min-w-[720px] relative">
+              {/* Winner badge */}
+              <div className="absolute -top-3 right-0 w-1/4 flex justify-center pointer-events-none z-10">
+                <span className="bg-primary text-primary-foreground font-mono text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 shadow-lg">
+                  ★ WINNER
+                </span>
+              </div>
+
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="border-b border-border">
+                    {COLS.map((c, i) => (
+                      <th
+                        key={i}
+                        className={`text-left py-5 px-4 font-mono text-xs uppercase tracking-widest ${
+                          i === 3
+                            ? "text-lime bg-primary/10 border-x border-lime/40"
+                            : "text-text-secondary"
+                        }`}
+                      >
+                        {c}
+                      </th>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {ROWS.map((row, i) => (
+                    <tr key={i} className="border-b border-border">
+                      <td className="py-5 px-4 font-mono text-text-secondary uppercase tracking-wider text-xs">
+                        {row.label}
+                      </td>
+                      {row.cells.map((cell, j) => {
+                        const isWinner = j === 2;
+                        return (
+                          <td
+                            key={j}
+                            className={`py-5 px-4 text-sm ${
+                              isWinner
+                                ? "bg-primary/10 border-x border-lime/40 font-medium"
+                                : ""
+                            }`}
+                          >
+                            <span className={`inline-flex items-center gap-2 ${toneText[cell.tone]}`}>
+                              <ToneIcon tone={cell.tone} />
+                              {cell.v}
+                            </span>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
+
+          <p className="mt-6 font-mono text-xs text-text-secondary/70 leading-relaxed">
+            ※ 순도 데이터는 시장 평균 기준. 실측 비교 데이터 확보 후 업데이트 예정.
+          </p>
         </div>
       </div>
     </section>
   );
 }
+
