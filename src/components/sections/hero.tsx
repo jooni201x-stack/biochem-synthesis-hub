@@ -1,4 +1,4 @@
-import { MoleculeMark } from "./brand";
+import { MoleculeMark } from "@/components/brand";
 
 const TICKER = [
   "Palmitoyl Pentapeptide-4", "Palmitoyl Tripeptide-1", "Palmitoyl Tripeptide-5",

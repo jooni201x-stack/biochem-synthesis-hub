@@ -1,4 +1,4 @@
-import { Logo, MoleculeMark } from "./brand";
+import { Logo, MoleculeMark } from "@/components/brand";
 
 export function Footer() {
   return (
