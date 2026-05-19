@@ -42,13 +42,13 @@ export function Hero() {
             className="font-serif font-light leading-[1.05] tracking-tight text-foreground animate-fade-up"
             style={{ fontSize: "clamp(2.75rem, 7vw, 72px)" }}
           >
-            <span className="font-korean">분자가 태어나는 순간,</span><br />
+            <span className="font-korean">국내 합성의 힘으로,</span><br />
             <span className="font-korean text-glow-lime" style={{ color: "#6abf7b" }}>
-              우리는 함께합니다.
+              바이오화학에 새로운 기준점을 만들겠습니다.
             </span>
           </h1>
           <p className="mt-10 text-base md:text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed animate-fade-up">
-            고려대학교 화학과 박사가 직접 합성하는<br />팔미토일 펩타이드 4종
+            국내 유기화학 합성 박사 연구진이 설계한 기술이<br />국내 바이오화학 원료 산업의 새 기준을 씁니다.
           </p>
           <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center animate-fade-up">
             <a href="#technology" className="px-8 py-3.5 border border-border text-foreground text-sm font-medium hover:border-lime hover:text-lime transition-all">
