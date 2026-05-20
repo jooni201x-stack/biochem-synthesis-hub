@@ -79,7 +79,7 @@ export function Origin() {
               {/* Big outline 왜 */}
               <div className="relative mt-auto">
                 <div
-                  className="font-korean font-light text-foreground leading-[0.9] mt-2 text-7xl opacity-100 rounded-xl px-[40px] my-[200px] py-0 mx-[20px]"
+                  className="font-korean font-light text-foreground leading-[0.9] mt-2 text-7xl opacity-100 rounded-xl px-[40px] my-[200px] py-0 mx-[20px] text-center"
                   style={{
                     fontSize: "clamp(160px, 28vw, 320px)",
                     color: "transparent",
